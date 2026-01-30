@@ -16,9 +16,9 @@ export async function POST(req: Request) {
 
     await resend.emails.send({
       from: "Portfolio <onboarding@resend.dev>",
-      to: process.env.CONTACT_EMAIL!,
+      to: [process.env.CONTACT_EMAIL!], // ✅ ARRAY
+      reply_to: email,                 // ✅ CORRECT KEY
       subject: subject || "New Portfolio Message",
-      replyTo: email,
       html: `
         <h2>New Contact Message</h2>
         <p><strong>Name:</strong> ${name}</p>
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error(err);
+    console.error("Contact form error:", err);
     return NextResponse.json(
       { error: "Failed to send email" },
       { status: 500 }

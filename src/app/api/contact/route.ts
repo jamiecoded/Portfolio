@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: "Portfolio <onboarding@resend.dev>",
       to: [process.env.CONTACT_EMAIL!], // ✅ ARRAY
-      reply_to: email,                 // ✅ CORRECT KEY
+      replyTo: email,                 // ✅ CORRECT KEY
       subject: subject || "New Portfolio Message",
       html: `
         <h2>New Contact Message</h2>
